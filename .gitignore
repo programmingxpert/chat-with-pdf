@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local vector storage and caches
+vectorstore/
+db/
+
+# PDFs (exclude default templates if needed)
+pdfs/*.pdf
+!pdfs/basic-text.pdf
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

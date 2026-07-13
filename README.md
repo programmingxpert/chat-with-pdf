@@ -1,87 +1,82 @@
-# 📄 Chat with your PDFs (100% Local)
+# chat-with-pdf
 
-A fully local chatbot powered by Ollama (LLaMA 3) that lets you interact with the content of your PDF files using natural language — no internet or OpenAI key needed.
-
-Made by **Satya** (@programmingxpert) 
-With ❤️
+A fully local, privacy-centric Retrieval-Augmented Generation (RAG) assistant that allows you to chat with multiple PDF documents simultaneously. Powered by Ollama (LLaMA 3), LangChain, and HuggingFace local embeddings, this application processes all text and vector storage 100% offline.
 
 ---
 
-## 🚀 Features
+## Features
 
-- Chat with multiple PDFs at once
-- 100% local processing — nothing leaves your machine
-- LLaMA 3 + sentence-transformer embeddings
-- Friendly chat interface with real-time "Thinking..." feedback
-- No reuploading needed — just press 🔄 Refresh to re-index new PDFs
-- Smart enough to answer meta-questions (e.g. "how many PDFs are loaded?", "what are you?")
-
-
-
-## 📦 Requirements
-
-- Python 3.10 or 3.11  
-- [Ollama](https://ollama.com) installed and running (`ollama run llama3` at least once)
+- **Multi-Document Ingestion**: Parse and query multiple PDF files concurrently.
+- **100% Offline Processing**: Zero cloud API dependencies. Your data never leaves your local machine.
+- **Dynamic Context Re-indexing**: Live reload system to scan and re-index the local directory when new documents are added.
+- **Local Embeddings & Vector Store**: Utilizes local SentenceTransformers for embedding generation and a local vector database for semantic search.
+- **Interactive UI**: Clean chat interface built with Streamlit, providing real-time response generation.
 
 ---
 
-## 🛠️ Setup Instructions
+## Tech Stack
 
-1. **Install Python dependencies**  
-   Open a terminal and run:
+- **Orchestration**: LangChain
+- **LLM Engine**: Ollama (LLaMA 3)
+- **Vector Database**: Local Vector Store
+- **Embeddings Model**: HuggingFace SentenceTransformers
+- **User Interface**: Streamlit
+- **File Parser**: PyPDF / PDFPlumber
+
+---
+
+## Project Structure
+
+```
+chat-with-pdf/
+├── app.py               # Core Streamlit application & RAG pipeline
+├── requirements.txt     # Python dependency configuration
+├── pdfs/                # Local directory for source PDF uploads
+├── db/                  # SQLite cache and metadata storage
+└── vectorstore/         # Local vector database persistence index
+```
+
+---
+
+## Setup & Installation
+
+### Prerequisites
+- Python 3.10 or 3.11
+- [Ollama](https://ollama.com) installed locally
+
+### Setup Steps
+
+1. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
-2. **Make sure Ollama is running**
-Open another terminal and run:
+   ```
 
-```bash
-ollama run llama3
-```
-3. **Add your PDFs**
-Place all your .pdf files into the pdfs/ folder.
+2. **Pull and Run LLaMA 3**
+   Ensure Ollama is running locally and pull the LLaMA 3 model:
+   ```bash
+   ollama pull llama3
+   ```
 
-4. **Run the app**
-In the terminal, run:
-```bash
-streamlit run app.py
-```
-5. **Use the app**
+3. **Incorporate Source Materials**
+   Place your target PDF documents in the `pdfs/` folder.
 
-- Visit http://localhost:8501 in your browser.
+4. **Launch Application**
+   ```bash
+   streamlit run app.py
+   ```
+   The application will automatically load in your browser at `http://localhost:8501`.
 
-- Ask questions about your PDFs.
+---
 
-- Click the 🔄 Refresh button to re-index if you add more files.
+## Future Improvements
 
-📁 Project Structure
-```graphql
-./
-├── app.py               # Main Streamlit app
-├── requirements.txt     # Python dependencies
-├── pdfs/                # Place your PDFs here
-└── vectorstore/         # Automatically generated local vector DB
-```
+- [ ] Add support for metadata filtering to restrict search queries to specific documents.
+- [ ] Implement local text-splitting optimizations (e.g. Semantic Chunking).
+- [ ] Integrate local cross-encoder re-ranking for improved query retrieval precision.
 
-## 💬 Example Questions
+---
 
-- "Summarize the content of all the PDFs."
+## Author
 
-- "What is the main idea in the second document?"
-
-- "How many PDFs are loaded?"
-
-- "What are you?"
-
-
-## 🔒 Privacy
-
-This chatbot runs entirely offline. No data is sent anywhere — your files and questions stay on your computer.
-
-## 🙌 Credits
-Built using:
-- LangChain
-- Ollama
-- HuggingFace Transformers
-
-🧠 Made by Satya (@programmingxpert)
-with ❤️
+**Satya**  
+GitHub: [programmingxpert](https://github.com/programmingxpert/)
